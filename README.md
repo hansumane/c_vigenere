@@ -11,6 +11,21 @@ Put contents into **input.txt**
 <action: encrypt or decrypt>
 ```
 
+Edit source code if you want a release version
+without debug information (optional)
+
+```
+@@ -1,7 +1,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #define BUFSIZE 512
+-// #define RELEASE
++#define RELEASE
+ 
+ /* returns length of the string without \0 at the end */
+ int length(const char *);
+```
+
 Compile and run program
 
 ```

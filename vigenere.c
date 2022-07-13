@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define BUFSIZE 512
+// #define RELEASE
 
 /* returns length of the string without \0 at the end */
 int length(const char *);
@@ -112,6 +113,15 @@ void vigenere(const char *alphabet, const char *text, const char *key_s, char **
       index = length(alphabet) + index;
     *(*result + i) = alphabet[index];
   }
+
+#ifndef RELEASE
+  printf("alphabet : %s : %d\n", alphabet, length(alphabet));
+  printf("text     : %s : %d\n", text, length(text));
+  printf("key_s    : %s : %d\n", key_s, length(key_s));
+  printf("key      : %s : %d\n", key, length(key));
+  puts  ("-----------------------------------------------");
+  printf("result   : %s : %d\n", *result, length(*result));
+#endif
 }
 
 int main(void)
@@ -144,7 +154,9 @@ int main(void)
       exit(1);
     }
 
+#ifdef RELEASE
   puts(result);
+#endif
 
   free(alphabet);
   free(text);
