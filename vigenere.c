@@ -126,8 +126,9 @@ void vigenere(const char *alphabet, const char *text, const char *key_s, char **
 
 int main(void)
 {
-  FILE *file = fopen("input.txt", "rb");
-  if (file == NULL)
+  FILE *input = fopen("input.txt", "rb");
+  FILE *output = fopen("output.txt", "w");
+  if (input == NULL)
     {
       fputs("Cannot open input.txt\n", stderr);
       exit(1);
@@ -139,10 +140,10 @@ int main(void)
        *command = NULL,
        *result = NULL;
 
-  char_readline(&alphabet, file);
-  char_readline(&text, file);
-  char_readline(&key, file);
-  char_readline(&command, file);
+  char_readline(&alphabet, input);
+  char_readline(&text, input);
+  char_readline(&key, input);
+  char_readline(&command, input);
 
   if (equal(command, "encrypt"))
     vigenere(alphabet, text, key, &result, 1);
@@ -157,6 +158,12 @@ int main(void)
 #ifdef RELEASE
   puts(result);
 #endif
+
+  fputs(result, output);
+  fputc('\n', output);
+
+  fclose(input);
+  fclose(output);
 
   free(alphabet);
   free(text);

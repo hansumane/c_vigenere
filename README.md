@@ -34,7 +34,7 @@ $ clang -std=c99 -Os vigenere.c -o out-vigenere
 $ ./out-vigenere
 ```
 
-The result will be printed in the console
+The result will be printed in the console and saved to **output.txt**
 
 ## Issues
 
