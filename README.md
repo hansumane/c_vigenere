@@ -26,11 +26,11 @@ without debug information (optional)
  int length(const char *);
 ```
 
-Compile and run program
+Compile with *compiler* and **make**,
+gcc is the default compiler
 
 ```
-$ gcc -std=c99 -Os vigenere.c -o out-vigenere # or
-$ clang -std=c99 -Os vigenere.c -o out-vigenere
+$ make CC=<compiler>
 $ ./out-vigenere
 ```
 
