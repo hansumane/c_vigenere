@@ -127,7 +127,6 @@ void vigenere(const char *alphabet, const char *text, const char *key_s, char **
 int main(void)
 {
   FILE *input = fopen("input.txt", "rb");
-  FILE *output = fopen("output.txt", "w");
   if (input == NULL)
     {
       fputs("Cannot open input.txt\n", stderr);
@@ -157,13 +156,13 @@ int main(void)
 
 #ifdef RELEASE
   puts(result);
-#endif
-
+  FILE *output = fopen("output.txt", "w");
   fputs(result, output);
   fputc('\n', output);
+  fclose(output);
+#endif
 
   fclose(input);
-  fclose(output);
 
   free(alphabet);
   free(text);

@@ -28,7 +28,8 @@ $ make CC=<compiler>
 $ ./out-vigenere
 ```
 
-The result will be printed in the console and saved to **output.txt**
+The result will be printed in the console and saved to **output.txt**,
+but only if you've built RELEASE
 
 ## Issues
 
