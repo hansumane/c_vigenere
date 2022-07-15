@@ -3,26 +3,26 @@
 #define BUFSIZE 512
 // #define RELEASE
 
-/* returns length of the string without \0 at the end */
+/* returns the length of the string without \0 at the end */
 int length(const char *);
 
-/* returns 1 if the strings are equal and 0 if they are not */
+/* returns 1 if the strings are equal and 0 if they are not.
+   there may probably be a more efficient way to do it... */
 int equal(const char *, const char *);
 
 /* copies contents of the second argument string to the first one */
 void copy(char *, const char *);
 
 /* allocates the memory and copies contents of
- * the second argument string to pointer of the first one */
+   the second argument string to pointer of the first one */
 void set(char **, const char *);
 
 /* returns the index of the second argument element
- * in the first argument string */
+   in the first argument string */
 int char_index(const char *, const char);
 
 /* reads everything before \n or EOF in
- * the second argument file to the first argument string
- * with hope that amount of chars will be less than 256 */
+   the second argument file to the first argument string */
 void char_readline(char **, FILE *);
 
 /* function that encrypts or decrypts everything */
@@ -34,19 +34,6 @@ int length(const char *array)
   while (array[i++] != 0)
     continue;
   return --i;
-}
-
-void copy(char *to, const char *from)
-{
-  for (int i = 0; i < length(from) + 1; ++i)
-    to[i] = from[i];
-}
-
-void set(char **to, const char *from)
-{
-  free(*to);
-  *to = malloc((length(from) + 1) * sizeof(char));
-  copy(*to, from);
 }
 
 int equal(const char *first, const char *second)
@@ -64,6 +51,19 @@ int equal(const char *first, const char *second)
   return 0;
 }
 
+void copy(char *to, const char *from)
+{
+  for (int i = 0; i < length(from) + 1; ++i)
+    to[i] = from[i];
+}
+
+void set(char **to, const char *from)
+{
+  free(*to);
+  *to = malloc((length(from) + 1) * sizeof(char));
+  copy(*to, from);
+}
+
 int char_index(const char *where, const char element)
 {
   for (int i = 0; i < length(where); ++i)
@@ -77,7 +77,7 @@ void char_readline(char **to, FILE *from)
   int left = BUFSIZE - 1;
   char char_buffer, string_buffer[BUFSIZE] = {};
 
-  while ((fread(&char_buffer, sizeof(char), 1, from)) != EOF)
+  while ((fread(&char_buffer, sizeof(char), 1, from)) > 0)
     {
       if (char_buffer == '\n')
         break;
