@@ -11,8 +11,7 @@ int main(void)
   if (input == NULL)
     {
       fputs("Cannot open input.txt\n", stderr);
-      exit_code = 1;
-      exit(exit_code);
+      exit(exit_code = 1);
     }
 
   char *alphabet = NULL,
@@ -32,7 +31,7 @@ int main(void)
     vigenere(&result, alphabet, text, key, -1);
   else
     {
-      fputs("Wrong encrypt / decrypt command!\n", stderr);
+      fputs("Wrong encrypt / decrypt argument!\n", stderr);
       exit_code = 2;
       goto END;
     }
