@@ -1,2 +1,4 @@
-out-*
+/test*
+/out-*
+/evigenere
 /output.txt

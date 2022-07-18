@@ -1,11 +1,12 @@
-SRC=vigenere.c
-BIN=out-vigenere
+SRC=main.c substring.c vigenere.c
+HDR=substring.h vigenere.h
+BIN=evigenere
 OUT=output.txt
 CC=gcc
 FLAG=-std=c99 -Os
 
-$(BIN): $(SRC)
+$(BIN): $(SRC) $(HDR)
 	$(CC) $(SRC) $(FLAG) -o $@
 
 clear:
-	rm -f $(BIN) $(OUT)
+	env rm -f $(BIN) $(OUT)
