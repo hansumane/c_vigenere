@@ -35,3 +35,7 @@ but only if you've built RELEASE
 
 I am not quite sure if this program works 100% great, so
 it may cause segfaults, other errors or even work improperly
+
+## Plans for future
+
+* Make this program work with command-line arguments (in future release)
