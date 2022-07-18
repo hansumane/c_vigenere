@@ -6,7 +6,7 @@ CC=gcc
 FLAG=-std=c99 -Os
 
 $(BIN): $(SRC) $(HDR)
-	$(CC) $(SRC) $(FLAG) -o $@
+	env $(CC) $(SRC) $(FLAG) -o $@
 
 clear:
 	env rm -f $(BIN) $(OUT)
