@@ -3,6 +3,8 @@
 #define BUFSIZE 512
 // #define RELEASE
 
+static int exit_code = 0;
+
 /* returns the length of the string without \0 at the end */
 int length(const char *);
 
@@ -26,7 +28,7 @@ int char_index(const char *, const char);
 void char_readline(char **, FILE *);
 
 /* function that encrypts or decrypts everything */
-void vigenere(const char *, const char *, const char *, char **, const int);
+void vigenere(char **, const char *, const char *, const char *, const int);
 
 int length(const char *array)
 {
@@ -91,7 +93,7 @@ void char_readline(char **to, FILE *from)
   copy(*to, string_buffer);
 }
 
-void vigenere(const char *alphabet, const char *text, const char *key_s, char **result, const int way)
+void vigenere(char **result, const char *alphabet, const char *text, const char *key_s, const int way)
 {
   int index;
   char *key = NULL;
@@ -130,7 +132,8 @@ int main(void)
   if (input == NULL)
     {
       fputs("Cannot open input.txt\n", stderr);
-      exit(1);
+      exit_code = 1;
+      exit(exit_code);
     }
 
   char *alphabet = NULL,
@@ -145,13 +148,14 @@ int main(void)
   char_readline(&command, input);
 
   if (equal(command, "encrypt"))
-    vigenere(alphabet, text, key, &result, 1);
+    vigenere(&result, alphabet, text, key, 1);
   else if (equal(command, "decrypt"))
-    vigenere(alphabet, text, key, &result, -1);
+    vigenere(&result, alphabet, text, key, -1);
   else
     {
       fputs("Wrong encrypt / decrypt command!\n", stderr);
-      exit(1);
+      exit_code = 2;
+      goto END;
     }
 
 #ifdef RELEASE
@@ -162,6 +166,7 @@ int main(void)
   fclose(output);
 #endif
 
+END:
   fclose(input);
 
   free(alphabet);
@@ -170,5 +175,5 @@ int main(void)
   free(command);
   free(result);
 
-  return 0;
+  return exit_code;
 }
