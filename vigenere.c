@@ -38,4 +38,7 @@ void vigenere(char **result, const char *alphabet, const char *text, const char 
   printf("result   : %s : %d\n", *result, length(*result));
 #endif
 
+  if (key != key_s)
+    free(key);
+
 }
