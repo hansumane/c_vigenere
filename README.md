@@ -11,6 +11,9 @@ Put contents into **input.txt**
 <action: encrypt or decrypt>
 ```
 
+**Warning!** Please make sure that every symbol from
+your text or your key is in the alphabet, even space
+
 Edit source code if you want a release version
 without debug information (optional)
 
