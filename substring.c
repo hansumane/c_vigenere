@@ -2,24 +2,26 @@
 #include <stdlib.h>
 #include "substring.h"
 
-int length(const char *array)
+int
+length (const char *string)
 {
   int i = 0;
-  while (array[i++] != 0)
+  while (string[i++] != 0)
     continue;
   return --i;
 }
 
-int equal(const char *first, const char *second)
+int
+equal (const char *s1, const char *s2)
 {
-  const int _length_first = length(first),
-            _length_second = length(second);
+  const int _length_s1 = length (s1);
+  const int _length_s2 = length (s2);
 
-  if (_length_first == _length_second)
+  if (_length_s1 == _length_s2)
     {
-      for (int i = 0; i < _length_first; ++i)
+      for (int i = 0; i < _length_s1; ++i)
         {
-          if (first[i] != second[i])
+          if (s1[i] != s2[i])
             return 0;
         }
       return 1;
@@ -27,53 +29,58 @@ int equal(const char *first, const char *second)
   return 0;
 }
 
-int cindex(const char *array, const char element)
+int
+cindex (const char *string, const char element)
 {
-  const int _length = length(array);
+  const int _length = length (string);
 
   for (int i = 0; i < _length; ++i)
-    if (array[i] == element)
+    if (string[i] == element)
       return i;
   return 0;
 }
 
-void copy(char *to, const char *from)
+void
+copy (char *where, const char *from)
 {
-  const int _length = length(from);
+  const int _length = length (from);
 
   for (int i = 0; i < _length + 1; ++i)
-    to[i] = from[i];
+    where[i] = from[i];
 }
 
-void set(char **to, const char *from)
+void
+set (char **what, const char *to)
 {
-  free(*to);
-  *to = calloc(length(from) + 1, sizeof(char));
-  copy(*to, from);
+  free (*what);
+  *what = calloc (length (to) + 1, sizeof (char));
+  copy (*what, to);
 }
 
-void setkey(char **key, const char *from, const int _length)
+void
+setkey (char **key, const char *to, const int _length)
 {
-  free(*key);
-  *key = calloc(_length + 1, sizeof(char));
-  copy(*key, from);
+  free (*key);
+  *key = calloc (_length + 1, sizeof (char));
+  copy (*key, to);
 }
 
-void freadline(char **to, FILE *from)
+void
+freadline (char **to, FILE *from)
 {
   int left = BUFSIZE - 1;
   char char_buffer, string_buffer[BUFSIZE] = {};
 
-  while ((fread(&char_buffer, sizeof(char), 1, from)) > 0)
+  while ((fread (&char_buffer, sizeof (char), 1, from)) > 0)
     {
       if (char_buffer == '\n')
         break;
-      string_buffer[length(string_buffer)] = char_buffer;
+      string_buffer[length (string_buffer)] = char_buffer;
       if (!(--left))
         break;
     }
 
-  free(*to);
-  *to = calloc(length(string_buffer) + 1, sizeof(char));
-  copy(*to, string_buffer);
+  free (*to);
+  *to = calloc (length (string_buffer) + 1, sizeof (char));
+  copy (*to, string_buffer);
 }
