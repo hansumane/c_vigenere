@@ -1,10 +1,9 @@
 #ifndef SUBSTRING_H
 #define SUBSTRING_H
-#define BUFSIZE 512
 
-/* returns the number of first non-zero char array elements */
+/* returns the number of first non-zero string elements */
 extern int
-length (const char *array);
+length (const char *string);
 
 /* returns 1 (true) if the strings are equal and 0 (false) if they are not */
 extern int
