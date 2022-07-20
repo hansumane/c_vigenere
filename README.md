@@ -23,11 +23,12 @@ without debug information (optional)
 3+ | #define RELEASE
 ```
 
-Compile with *compiler* and **make**,
-gcc is the default compiler
+Compile with *compiler*, *flags* and **make**,
+"gcc" is default compiler, and "-std=gnu99 -Os"
+are default flags
 
 ```
-$ make CC=<compiler>
+$ make CC=<compiler> FLAG=<flags>
 $ ./evigenere
 ```
 

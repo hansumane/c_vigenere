@@ -3,7 +3,7 @@ HDR=substring.h vigenere.h
 BIN=evigenere
 OUT=output.txt
 CC=gcc
-FLAG=-std=c99 -Os
+FLAG=-std=gnu99 -Os
 
 $(BIN): $(SRC) $(HDR)
 	env $(CC) $(SRC) $(FLAG) -o $@

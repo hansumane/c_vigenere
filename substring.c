@@ -68,19 +68,17 @@ setkey (char **key, const char *to, const int _length)
 void
 freadline (char **to, FILE *from)
 {
-  int left = BUFSIZE - 1;
-  char char_buffer, string_buffer[BUFSIZE] = {};
+  int _length;
+  size_t rsize = 0;
+  free (*to); *to = NULL;
+  getline(to, &rsize, from);
+  _length = length(*to);
 
-  while ((fread (&char_buffer, sizeof (char), 1, from)) > 0)
+  if (_length > 0 && (*to)[_length - 1] == '\n')
     {
-      if (char_buffer == '\n')
-        break;
-      string_buffer[length (string_buffer)] = char_buffer;
-      if (!(--left))
-        break;
+      (*to)[_length - 1] = '\0';
+      *to = realloc (*to, _length * sizeof (char));
     }
-
-  free (*to);
-  *to = calloc (length (string_buffer) + 1, sizeof (char));
-  copy (*to, string_buffer);
+  else
+    *to = realloc (*to, (_length + 1) * sizeof (char));
 }
