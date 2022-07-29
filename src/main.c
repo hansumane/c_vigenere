@@ -6,11 +6,16 @@
 static int exit_code = 0;
 
 int
-main (void)
+main (int argc, char **argv)
 {
-	FILE *input = fopen("input.txt", "rb");
+	if (argc < 2) {
+		fputs("Not enough arguments!\n", stderr);
+		exit(exit_code = 1);
+	}
+
+	FILE *input = fopen(argv[1], "rb");
 	if (input == NULL) {
-		fputs("Cannot open input.txt\n", stderr);
+		fprintf(stderr, "Cannot open %s\n", argv[1]);
 		exit(exit_code = 1);
 	}
 
