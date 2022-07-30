@@ -1,6 +1,6 @@
 #ifndef VIGENERE_H
 #define VIGENERE_H
-#define RELEASE
+// #define RELEASE
 
 /* function that encrypts or decrypts everything */
 extern void
