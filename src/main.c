@@ -3,19 +3,20 @@
 #include "substring.h"
 #include "vigenere.h"
 
+static char *filename = NULL;
 static int exit_code = 0;
 
 int
 main (int argc, char **argv)
 {
-	if (argc < 2) {
-		fputs("Not enough arguments!\n", stderr);
-		exit(exit_code = 1);
-	}
+	if (argc < 2)
+		filename = "input.txt";
+	else
+		filename = argv[1];
 
-	FILE *input = fopen(argv[1], "rb");
+	FILE *input = fopen(filename, "rb");
 	if (input == NULL) {
-		fprintf(stderr, "Cannot open %s\n", argv[1]);
+		fprintf(stderr, "Cannot open %s\n", filename);
 		exit(exit_code = 1);
 	}
 
